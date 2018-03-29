@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<p>Username: {{ user }}</p>
+	<p>First name: {{ user.first_name }}</p>
+	<p>Last name: {{ user.last_name }}</p>
+	<p>Email: {{ user.email }}</p>
+	<p>Description: {{ user.userprofille.description }}</p>
+  <p>Phone: {{ user.userprofille.phone }}</p>
+  <p>City: {{ user.userprofille.city }}</p>
+  <p>Website: {{ user.userprofille.website }}</p>
+  <p>Sex: {{ user.userprofille.sex }}</p>
+  {%  if user.userprofille.image %}
+  	<img src="{{ user.userprofille.image.url }}" width="240">
+  {% else %}
+    {% if user.is_staff %}
+    <img src="/media/profile_image/staff-standart.jpg" width="240">
+    {% elif user.userprofille.sex == 'M' %}
+    <img src="/media/profile_image/gentle-standart.jpg" width="240">
+    {% else %}
+    <img src="/media/profile_image/lady-standart.jpg" width="240">
+    {% endif %}
+  {% endif %}
+</div>
+
+
+{% endblock %}
